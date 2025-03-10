@@ -7,10 +7,11 @@ let dealerResult =0;
 let blnce = 100;
 let amntBet = 0;
 let result = 0;
+let nGame=0;
 // amntBet = Math.min(Math.max(amntBet, 1), blnce);
 
 function hit() {
-  if (standAmnt === 0 && result < 21) {
+  if (standAmnt === 0 && result < 21 && nGame === 1) {
     if (hitAmnt === 1) {
       hitAmnt++;
       num.push(Math.floor(Math.random() * 10) + 1);
@@ -88,6 +89,8 @@ function hit() {
 // }
 
 function reset() {
+  nGame = 0;
+  nGame++;
   dealer = [];
   standAmnt = 0;
   hitAmnt = 1;
@@ -101,7 +104,7 @@ function reset() {
 }
 function stand() {
   standAmnt++;
-  if (standAmnt == 1) {
+  if (standAmnt === 1) {
     dealer.push(Math.floor(Math.random() * 10) + 1);
     dealer.push(Math.floor(Math.random() * 10) + 1);
     dealerResult = dealer[0] + dealer[1];
