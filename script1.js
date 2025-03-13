@@ -233,6 +233,7 @@ function finish() {
   }
 }
 
+
 function allIn() {
   amntBet = blnce;
   betAmount.innerHTML = `Amount Bet: $${amntBet}`;
