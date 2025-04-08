@@ -8,6 +8,7 @@ let blnce = 100;
 let amntBet = 0;
 let result = 0;
 let nGame=0;
+let jop = 0;
 // amntBet = Math.min(Math.max(amntBet, 1), blnce);
 
 function hit() {
@@ -89,18 +90,25 @@ function hit() {
 // }
 
 function reset() {
-  nGame = 0;
-  nGame++;
-  dealer = [];
-  standAmnt = 0;
-  hitAmnt = 1;
-  num = [];
-  num.push(Math.floor(Math.random() * 10) + 1);
-  num.push(Math.floor(Math.random() * 10) + 1);
-  result = num[0] + num[1];
-  yours.innerHTML = `Your Cards: ${num[0]} + ${num[1]} = ${result}`;
-  dealers.innerHTML = `Bots Cards: ? + ? = ?`;
-  outcome.innerHTML = ``;
+  if(amntBet === 0){
+    alert("You must bet an amount before starting.")
+    console.log("no bet")
+      if(standAmnt === 0 && hitAmnt === 1 && jop === 0 && amntBet >= 1){
+          jop++;
+          nGame = 0;
+          nGame++;
+          dealer = [];
+          standAmnt = 0;
+          hitAmnt = 1;
+          num = [];
+          num.push(Math.floor(Math.random() * 10) + 1);
+          num.push(Math.floor(Math.random() * 10) + 1);
+          result = num[0] + num[1];
+          yours.innerHTML = `Your Cards: ${num[0]} + ${num[1]} = ${result}`;
+          dealers.innerHTML = `Bots Cards: ? + ? = ?`;
+          outcome.innerHTML = ``;
+      }
+  }
 }
 function stand() {
   standAmnt++;
@@ -149,6 +157,8 @@ function betting() {
 function finish() {
   if(standAmnt > 1){
     standAmnt = 0;
+    jop = 0;
+
       console.log("finish")
     if (result > 21 || (dealerResult > result && dealerResult < 21) || dealerResult === 21) {
       outcome.innerHTML = `YOU LOSE!!!`;
