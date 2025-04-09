@@ -93,21 +93,20 @@ function reset() {
   if(amntBet === 0){
     alert("You must bet an amount before starting.")
     console.log("no bet")
-      if(standAmnt === 0 && hitAmnt === 1 && jop === 0 && amntBet >= 1){
-          jop++;
-          nGame = 0;
-          nGame++;
-          dealer = [];
-          standAmnt = 0;
-          hitAmnt = 1;
-          num = [];
-          num.push(Math.floor(Math.random() * 10) + 1);
-          num.push(Math.floor(Math.random() * 10) + 1);
-          result = num[0] + num[1];
-          yours.innerHTML = `Your Cards: ${num[0]} + ${num[1]} = ${result}`;
-          dealers.innerHTML = `Bots Cards: ? + ? = ?`;
-          outcome.innerHTML = ``;
-      }
+  } else if (standAmnt === 0 && hitAmnt === 1 && jop === 0 && amntBet >= 1) {
+    jop++;
+    nGame = 0;
+    nGame++;
+    dealer = [];
+    tandAmnt = 0;
+    hitAmnt = 1;
+    num = [];
+    num.push(Math.floor(Math.random() * 10) + 1);
+    num.push(Math.floor(Math.random() * 10) + 1);
+    result = num[0] + num[1];
+    yours.innerHTML = `Your Cards: ${num[0]} + ${num[1]} = ${result}`;
+    dealers.innerHTML = `Bots Cards: ? + ? = ?`;
+    outcome.innerHTML = ``;
   }
 }
 function stand() {
@@ -275,3 +274,19 @@ function allIn() {
 //     document.getElementById('button6').innerHTML = ``
 
 // }
+
+/*if(standAmnt === 0 && hitAmnt === 1 && jop === 0 && amntBet >= 1){
+          jop++;
+          nGame = 0;
+          nGame++;
+          dealer = [];
+          standAmnt = 0;
+          hitAmnt = 1;
+          num = [];
+          num.push(Math.floor(Math.random() * 10) + 1);
+          num.push(Math.floor(Math.random() * 10) + 1);
+          result = num[0] + num[1];
+          yours.innerHTML = `Your Cards: ${num[0]} + ${num[1]} = ${result}`;
+          dealers.innerHTML = `Bots Cards: ? + ? = ?`;
+          outcome.innerHTML = ``;
+      }*/
