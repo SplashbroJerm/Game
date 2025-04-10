@@ -7,10 +7,14 @@ let dealerResult =0;
 let blnce = 100;
 let amntBet = 0;
 let result = 0;
+let nGame=0;
+let jop = 0;
+
+let dealers = document.getElementById("dealers")
 // amntBet = Math.min(Math.max(amntBet, 1), blnce);
 
 function hit() {
-  if (standAmnt === 0 && result < 21) {
+  if (standAmnt === 0 && result < 21 && nGame === 1) {
     if (hitAmnt === 1) {
       hitAmnt++;
       num.push(Math.floor(Math.random() * 10) + 1);
@@ -88,20 +92,28 @@ function hit() {
 // }
 
 function reset() {
-  dealer = [];
-  standAmnt = 0;
-  hitAmnt = 1;
-  num = [];
-  num.push(Math.floor(Math.random() * 10) + 1);
-  num.push(Math.floor(Math.random() * 10) + 1);
-  result = num[0] + num[1];
-  yours.innerHTML = `Your Cards: ${num[0]} + ${num[1]} = ${result}`;
-  dealers.innerHTML = `Bots Cards: ? + ? = ?`;
-  outcome.innerHTML = ``;
+  if(amntBet === 0){
+    alert("You must bet an amount before starting.")
+    console.log("no bet")
+  } else if (standAmnt === 0 && hitAmnt === 1 && jop === 0 && amntBet >= 1) {
+    jop++;
+    nGame = 0;
+    nGame++;
+    dealer = [];
+    standAmnt = 0;
+    hitAmnt = 1;
+    num = [];
+    num.push(Math.floor(Math.random() * 10) + 1);
+    num.push(Math.floor(Math.random() * 10) + 1);
+    result = num[0] + num[1];
+    yours.innerHTML = `Your Cards: ${num[0]} + ${num[1]} = ${result}`;
+    dealers.innerHTML = `Bots Cards: ? + ? = ?`;
+    outcome.innerHTML = ``;
+  }
 }
 function stand() {
   standAmnt++;
-  if (standAmnt == 1) {
+  if (standAmnt === 1) {
     dealer.push(Math.floor(Math.random() * 10) + 1);
     dealer.push(Math.floor(Math.random() * 10) + 1);
     dealerResult = dealer[0] + dealer[1];
@@ -146,6 +158,8 @@ function betting() {
 function finish() {
   if(standAmnt > 1){
     standAmnt = 0;
+    jop = 0;
+
       console.log("finish")
     if (result > 21 || (dealerResult > result && dealerResult < 21) || dealerResult === 21) {
       outcome.innerHTML = `YOU LOSE!!!`;
@@ -230,6 +244,7 @@ function finish() {
   }
 }
 
+
 function allIn() {
   amntBet = blnce;
   betAmount.innerHTML = `Amount Bet: $${amntBet}`;
@@ -261,3 +276,19 @@ function allIn() {
 //     document.getElementById('button6').innerHTML = ``
 
 // }
+
+/*if(standAmnt === 0 && hitAmnt === 1 && jop === 0 && amntBet >= 1){
+          jop++;
+          nGame = 0;
+          nGame++;
+          dealer = [];
+          standAmnt = 0;
+          hitAmnt = 1;
+          num = [];
+          num.push(Math.floor(Math.random() * 10) + 1);
+          num.push(Math.floor(Math.random() * 10) + 1);
+          result = num[0] + num[1];
+          yours.innerHTML = `Your Cards: ${num[0]} + ${num[1]} = ${result}`;
+          dealers.innerHTML = `Bots Cards: ? + ? = ?`;
+          outcome.innerHTML = ``;
+      }*/
