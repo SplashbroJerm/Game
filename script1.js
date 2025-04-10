@@ -8,12 +8,15 @@ let blnce = 100;
 let amntBet = 0;
 let result = 0;
 let nGame=0;
+let hitPressed = false;
 let jop = 0;
 
-let dealers = document.getElementById("dealers")
+let dealers = document.getElementById("dealers");
+let balance = document.getElementById("balance");
 // amntBet = Math.min(Math.max(amntBet, 1), blnce);
 
 function hit() {
+  hitPressed = true;
   if (standAmnt === 0 && result < 21 && nGame === 1) {
     if (hitAmnt === 1) {
       hitAmnt++;
@@ -112,7 +115,8 @@ function reset() {
   }
 }
 function stand() {
-  standAmnt++;
+  if(hitPressed === true){
+    standAmnt++;
   if (standAmnt === 1) {
     dealer.push(Math.floor(Math.random() * 10) + 1);
     dealer.push(Math.floor(Math.random() * 10) + 1);
@@ -135,6 +139,31 @@ function stand() {
     dealers.innerHTML = `Bots Cards: ${dealer[0]} + ${dealer[1]} + ${dealer[2]} + ${dealer[3]} + ${dealer[4]} = ${dealerResult}`;
   }
 }
+}
+//   }
+//   standAmnt++;
+//   if (standAmnt === 1) {
+//     dealer.push(Math.floor(Math.random() * 10) + 1);
+//     dealer.push(Math.floor(Math.random() * 10) + 1);
+//     dealerResult = dealer[0] + dealer[1];
+//     dealers.innerHTML = `Bots Cards: ${dealer[0]} + ${dealer[1]} = ${dealerResult}`;
+//   }
+//   if (dealerResult <= 16 && standAmnt == 2) {
+//     dealer.push(Math.floor(Math.random() * 10) + 1);
+//     dealerResult = dealer[0] + dealer[1] + dealer[2];
+//     dealers.innerHTML = `Bots Cards: ${dealer[0]} + ${dealer[1]} + ${dealer[2]} = ${dealerResult}`;
+//   }
+//   if (dealerResult <= 16 && standAmnt == 3) {
+//     dealer.push(Math.floor(Math.random() * 10) + 1);
+//     dealerResult = dealer[0] + dealer[1] + dealer[2] + dealer[3];
+//     dealers.innerHTML = `Bots Cards: ${dealer[0]} + ${dealer[1]} + ${dealer[2]} + ${dealer[3]} = ${dealerResult}`;
+//   }
+//   if (dealerResult <= 16 && standAmnt == 4) {
+//     dealer.push(Math.floor(Math.random() * 10) + 1);
+//     dealerResult = dealer[0] + dealer[1] + dealer[2] + dealer[3] + dealer[4];
+//     dealers.innerHTML = `Bots Cards: ${dealer[0]} + ${dealer[1]} + ${dealer[2]} + ${dealer[3]} + ${dealer[4]} = ${dealerResult}`;
+//   }
+// }
 // let balance = document.getElementById('balance');
 function amountBalance() {
   balance.innerHTML = `Balance: $${blnce}`;
@@ -156,9 +185,11 @@ function betting() {
   }
 }
 function finish() {
+  console.log("step 1")
   if(standAmnt > 1){
     standAmnt = 0;
     jop = 0;
+    hitAmnt = 1;
 
       console.log("finish")
     if (result > 21 || (dealerResult > result && dealerResult < 21) || dealerResult === 21) {
@@ -166,12 +197,14 @@ function finish() {
       blnce -= amntBet;
       balance.innerHTML = `Balance: $${blnce}`;
       amntBet = 0;
+      console.log("step 2")
       betAmount.innerHTML = `Amount Bet: $${amntBet}`;
     } else if (result < 21 && result > dealerResult || dealerResult > 21) {
       outcome.innerHTML = `YOU WIN!!!`;
       blnce += amntBet;
       balance.innerHTML = `Balance: $${blnce}`;
       amntBet = 0;
+      console.log("step 3")
       betAmount.innerHTML = `Amount Bet: $${amntBet}`;
     } else if(result === dealerResult){
       outcome.innerHTML = `TIE !?!!??!`;
